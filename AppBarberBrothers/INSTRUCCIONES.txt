@@ -1,0 +1,30 @@
+Si necesitan las credenciales de la BD estan en el archivo persistence.xml
+en la carpeta META-INF.
+Nombre de la BD: Brothers
+En el workbench crean una nueva MySQLConnection o la que ya tienen la modifican para que quede asi:
+Usuario:root
+Contrasena:123456
+Despues ejecutan el script del Luis para generar la BD.
+Con eso quedaria lista la BD
+
+
+Para probar que el proyecto funciona ya deje yo listo el main, pero tienen que:
+Hacer un registro en la tabla Empleado de la BD (A MANO) que el empleado tenga el ID 1
+Hacer un registro en la tabla Cliente de la BD (A MANO) que el cliente tenga el ID 2
+Hacer un registro en la tabla Servicio de la BD (A MANO) que el servicio tenga el ID 3
+
+Por ultimo deben colocar los jars necesarios en las rutas correctas:
+El jar mysql-connector-java-5.1.45.jar es para la conexion, ponganglo en su carpeta de netbeans
+C:\Program Files\NetBeans 8.2\ide\modules\ext\mysql-connector-java-5.1.45.jar
+jars\mysql-connector-java-5.1.45.jar -- este supongo pedira que lo importen al iniciar el proyecto
+
+Si ven jars de mas es por si los ocupamos despues
+
+
+AHORA SI SEGUN YO SOLO ES DARLE EJECUTAR Y LES DEBERIA IMPRIMIR LA CITA CON LOS VALORES QUE
+REGISTRARON A MANO EN LA BASE DE DATOS
+
+
+--Si les pide que tienen que hacer una conexion se hace en la pestania de servicios
+
+ 
