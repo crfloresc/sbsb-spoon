@@ -59,11 +59,16 @@ public class ControlCitas extends Control {
             Citas cita = (Citas) iterator.next();
             Date inicio_servicio = cita.getFecha();
             Date fin_servicio = DateUtils.addHours(cita.getFecha(), cita.getServicio().getDuracion());
+            Date inicio_cita = cita.getFecha();
+            Date fin_cita = DateUtils.addHours(inicio_cita, nueva_cita.getServicio().getDuracion());
             
+            boolean esta_ocupando = (DateUtils.truncatedCompareTo(inicio_cita, inicio_servicio, Calendar.MINUTE) >= 0
+                    && DateUtils.truncatedCompareTo(inicio_cita, fin_servicio, Calendar.MINUTE) < 0)
+                    || (DateUtils.truncatedCompareTo(fin_cita, inicio_servicio, Calendar.MINUTE) > 0
+                    && DateUtils.truncatedCompareTo(fin_cita, fin_servicio, Calendar.MINUTE) <= 0);
             try {
-                if (DateUtils.truncatedCompareTo(inicio_servicio, cita.getFecha(), Calendar.MINUTE) <= 0
-                        && DateUtils.truncatedCompareTo(fin_servicio, cita.getFecha(), Calendar.MINUTE) >= 0) {
-                    throw new Exception("Hay una cita agendada a la misma hora.");
+                if (esta_ocupando) {
+                    throw new Exception();
                 }
             } catch (Exception e) {
                 return false;
