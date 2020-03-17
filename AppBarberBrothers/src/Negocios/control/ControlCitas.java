@@ -5,12 +5,9 @@ import Datos.entidades.Citas;
 import Datos.entidades.Clientes;
 import Datos.entidades.Empleado;
 import Datos.entidades.Servicios;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
-import org.apache.commons.lang3.time.DateUtils;
 
 
 public class ControlCitas extends Control {
