@@ -423,7 +423,8 @@ public class ViewMenuCitas extends javax.swing.JFrame {
             System.out.println("Agregar cita");
             int value = (int) model.getValueAt(row, col);
             System.out.println(value);
-            ViewGestorCita vgc = new ViewGestorCita();
+
+            ViewGestorCita vgc = new ViewGestorCita(ViewGestorCita.AGREGAR);
             vgc.setVisible(true);
             this.dispose();
         } else {
@@ -439,6 +440,10 @@ public class ViewMenuCitas extends javax.swing.JFrame {
             System.out.println("Modificar cita");
             String value = (String) model.getValueAt(row, col);
             System.out.println(value);
+
+            ViewGestorCita vgc = new ViewGestorCita(ViewGestorCita.MODIFICAR);
+            vgc.setVisible(true);
+            this.dispose();
         } else {
             javax.swing.JOptionPane.showMessageDialog(this, "No se ha seleccionado ningun dato!");
         }

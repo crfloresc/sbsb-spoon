@@ -21,9 +21,15 @@ public class MetroButton extends JButton implements MouseListener, MouseMotionLi
     private Color colorTextPressed = new Color(255, 255, 255);
     private Color colorTextHover = new Color(255, 255, 255);
     private final Font f = new Font("Tahoma", Font.BOLD, 14);
+    private boolean isDisabled = false;
 
     @SuppressWarnings("LeakingThisInConstructor")
     public MetroButton() {
+        init();
+    }
+
+    public MetroButton(boolean isDisabled) {
+        this.isDisabled = isDisabled;
         init();
     }
 
@@ -62,14 +68,18 @@ public class MetroButton extends JButton implements MouseListener, MouseMotionLi
 
     @Override
     public void mousePressed(MouseEvent e) {
-        this.setForeground(this.colorTextPressed);
-        this.setBackground(this.colorPressed);
+        if (!isDisabled) {
+            this.setForeground(this.colorTextPressed);
+            this.setBackground(this.colorPressed);
+        }
     }
 
     @Override
-    public void mouseReleased(MouseEvent e) {       
-        this.setBackground(this.colorNormal);
-        this.setForeground(this.colorTextNormal);
+    public void mouseReleased(MouseEvent e) {
+        if (!isDisabled) {
+            this.setBackground(this.colorNormal);
+            this.setForeground(this.colorTextNormal);
+        }
     }
 
     @Override
@@ -78,9 +88,24 @@ public class MetroButton extends JButton implements MouseListener, MouseMotionLi
 
     @Override
     public void mouseExited(MouseEvent e) {
-        this.setBorder(null);
-        this.setBackground(this.colorNormal);
-        this.setForeground(this.colorTextNormal);
+        if (!isDisabled) {
+            this.setBorder(null);
+            this.setBackground(this.colorNormal);
+            this.setForeground(this.colorTextNormal);
+        }
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+        if (!isDisabled) {
+            this.setForeground(this.colorTextHover);
+            this.setBackground(this.colorHover);
+            this.setBorder(bordeMoved);
+        }
     }
 
     public Color getColorPressed() {
@@ -139,16 +164,5 @@ public class MetroButton extends JButton implements MouseListener, MouseMotionLi
 
     public void setColorBorde(Border bordeMoved) {
         this.bordeMoved = bordeMoved;
-    }
-
-    @Override
-    public void mouseDragged(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseMoved(MouseEvent e) {
-        this.setForeground(this.colorTextHover);
-        this.setBackground(this.colorHover);
-        this.setBorder(bordeMoved);
     }
 }

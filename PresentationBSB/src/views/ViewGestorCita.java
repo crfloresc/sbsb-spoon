@@ -3,9 +3,11 @@ package views;
 import java.util.GregorianCalendar;
 
 import buttons.TableCalendarRender;
-import buttons.TableScheduleRender;
 
 public class ViewGestorCita extends javax.swing.JFrame {
+
+    public static int AGREGAR = 1;
+    public static int MODIFICAR = 2;
 
     private javax.swing.JLabel lblMonth;
     private javax.swing.JComboBox cmbYear;
@@ -17,9 +19,22 @@ public class ViewGestorCita extends javax.swing.JFrame {
     private javax.swing.JScrollPane stblCalendar;
     private javax.swing.JPanel pnlCalendar;
     private int realYear, realMonth, realDay, currentYear, currentMonth;
+    private int tipo;
+    private boolean isDisabledAgregar = false;
+    private boolean isDisabledModificar = false;
 
-    public ViewGestorCita() {
+    public ViewGestorCita(int tipo) {
+        this.tipo = tipo;
         initComponents();
+
+        if (tipo == AGREGAR) {
+            btnAgregarCita.addActionListener(this::btnAgregarCitaActionPerformed);
+            btnModificarCita.setEnabled(false);
+        } else if (tipo == MODIFICAR) {
+            btnModificarCita.addActionListener(this::btnModificarCitaActionPerformed);
+            btnAgregarCita.setEnabled(false);
+        }
+
         // Create controls
         lblMonth = new javax.swing.JLabel("Enero");
         cmbYear = new javax.swing.JComboBox();
@@ -132,14 +147,24 @@ public class ViewGestorCita extends javax.swing.JFrame {
         pnlHamburgerMenu = new javax.swing.JPanel();
         pnlCalendarSection = new javax.swing.JPanel();
         pnlButtonsSection = new javax.swing.JPanel();
-        btnAgregarCita = new buttons.MetroButton();
-        btnModificarCita = new buttons.MetroButton();
-        btnEliminarCita = new buttons.MetroButton();
+        if (tipo == ViewGestorCita.MODIFICAR) {
+            isDisabledAgregar = true;
+        }
+        btnAgregarCita = new buttons.MetroButton(isDisabledAgregar);
+        if (tipo == ViewGestorCita.AGREGAR) {
+            isDisabledModificar = true;
+        }
+        btnModificarCita = new buttons.MetroButton(isDisabledModificar);
+        btnCancelar = new buttons.MetroButton();
         pnlScheduleSection = new javax.swing.JPanel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jComboBox3 = new javax.swing.JComboBox<>();
-        jComboBox4 = new javax.swing.JComboBox<>();
+        cbBarberos = new javax.swing.JComboBox<>();
+        cbClientes = new javax.swing.JComboBox<>();
+        cbFechas = new javax.swing.JComboBox<>();
+        cbServicios = new javax.swing.JComboBox<>();
+        labelBarberos = new javax.swing.JLabel();
+        labelClientes = new javax.swing.JLabel();
+        labelFecha = new javax.swing.JLabel();
+        labelServicio = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -270,28 +295,18 @@ public class ViewGestorCita extends javax.swing.JFrame {
 
         btnAgregarCita.setText("Agregar cita");
         btnAgregarCita.setColorBorde(null);
-        btnAgregarCita.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarCitaActionPerformed(evt);
-            }
-        });
 
         btnModificarCita.setText("Modificar cita");
         btnModificarCita.setColorBorde(null);
-        btnModificarCita.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnModificarCitaActionPerformed(evt);
-            }
-        });
 
-        btnEliminarCita.setBackground(new java.awt.Color(204, 0, 0));
-        btnEliminarCita.setText("Eliminar cita");
-        btnEliminarCita.setColorBorde(null);
-        btnEliminarCita.setColorHover(new java.awt.Color(102, 0, 0));
-        btnEliminarCita.setColorNormal(new java.awt.Color(204, 0, 0));
-        btnEliminarCita.addActionListener(new java.awt.event.ActionListener() {
+        btnCancelar.setBackground(new java.awt.Color(204, 0, 0));
+        btnCancelar.setText("Cancelar");
+        btnCancelar.setColorBorde(null);
+        btnCancelar.setColorHover(new java.awt.Color(102, 0, 0));
+        btnCancelar.setColorNormal(new java.awt.Color(204, 0, 0));
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarCitaActionPerformed(evt);
+                btnCancelarActionPerformed(evt);
             }
         });
 
@@ -302,7 +317,7 @@ public class ViewGestorCita extends javax.swing.JFrame {
             .addGroup(pnlButtonsSectionLayout.createSequentialGroup()
                 .addGap(84, 84, 84)
                 .addGroup(pnlButtonsSectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnEliminarCita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnModificarCita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAgregarCita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(83, Short.MAX_VALUE))
@@ -315,7 +330,7 @@ public class ViewGestorCita extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnModificarCita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnEliminarCita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(13, 13, 13))
         );
 
@@ -323,13 +338,67 @@ public class ViewGestorCita extends javax.swing.JFrame {
         pnlScheduleSection.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         pnlScheduleSection.setForeground(new java.awt.Color(204, 204, 204));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbBarberos.setModel(
+            new javax.swing.DefaultComboBoxModel<>(
+                new String[] {
+                    "Herman Gilberto Flores",
+                    "Hector Ivan Sanchez",
+                    "Alejandro Medillin",
+                    "Emilio Lopez"
+                }
+            )
+        );
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbClientes.setModel(
+            new javax.swing.DefaultComboBoxModel<>(
+                new String[] {
+                    "Jaime Emiliano Zapata I",
+                    "Luis Miguel Hidalgo Mendivil",
+                    "Elva Ginon Contreras Sol",
+                    "Chu Pamela Apodaca Wilson",
+                    "Cliente en general"
+                }
+            )
+        );
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbFechas.setModel(
+            new javax.swing.DefaultComboBoxModel<>(
+                new String[] {
+                    "10:00",
+                    "11:00",
+                    "12:00",
+                    "16:00",
+                    "18:00"
+                }
+            )
+        );
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbServicios.setModel(
+            new javax.swing.DefaultComboBoxModel<>(
+                new String[] {
+                    "Barba",
+                    "Cabello",
+                    "Barba y cabello",
+                    "Tinte"
+                }
+            )
+        );
+
+        labelBarberos.setBackground(new java.awt.Color(0, 0, 0));
+        labelBarberos.setForeground(new java.awt.Color(0, 0, 0));
+        labelBarberos.setText("Seleccionar barbero:");
+
+        labelClientes.setBackground(new java.awt.Color(0, 0, 0));
+        labelClientes.setForeground(new java.awt.Color(0, 0, 0));
+        labelClientes.setText("Seleccionar cliente");
+
+        labelFecha.setBackground(new java.awt.Color(0, 0, 0));
+        labelFecha.setForeground(new java.awt.Color(0, 0, 0));
+        labelFecha.setText("Seleccionar fecha y hora:");
+
+        labelServicio.setBackground(new java.awt.Color(0, 0, 0));
+        labelServicio.setForeground(new java.awt.Color(0, 0, 0));
+        labelServicio.setText("Seleccionar tipo de corte:");
 
         javax.swing.GroupLayout pnlScheduleSectionLayout = new javax.swing.GroupLayout(pnlScheduleSection);
         pnlScheduleSection.setLayout(pnlScheduleSectionLayout);
@@ -337,24 +406,38 @@ public class ViewGestorCita extends javax.swing.JFrame {
             pnlScheduleSectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlScheduleSectionLayout.createSequentialGroup()
                 .addGap(51, 51, 51)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnlScheduleSectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cbFechas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelBarberos)
+                    .addComponent(cbBarberos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelFecha))
+                .addGap(36, 36, 36)
+                .addGroup(pnlScheduleSectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelServicio)
+                    .addComponent(cbServicios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelClientes)
+                    .addComponent(cbClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlScheduleSectionLayout.setVerticalGroup(
             pnlScheduleSectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlScheduleSectionLayout.createSequentialGroup()
-                .addGap(107, 107, 107)
+                .addGap(86, 86, 86)
                 .addGroup(pnlScheduleSectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(labelBarberos)
+                    .addComponent(labelClientes))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlScheduleSectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbBarberos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(38, 38, 38)
+                .addGroup(pnlScheduleSectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelFecha)
+                    .addComponent(labelServicio))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlScheduleSectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbFechas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbServicios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -409,17 +492,58 @@ public class ViewGestorCita extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAgregarCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarCitaActionPerformed
-        //
-    }//GEN-LAST:event_btnAgregarCitaActionPerformed
+    private void btnAgregarCitaActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        final int confirm = javax.swing.JOptionPane.showConfirmDialog(
+                        this, 
+                        "Seguro que quiere agregar la cita?",
+                        "Agregar cita",
+                        javax.swing.JOptionPane.WARNING_MESSAGE,
+                        javax.swing.JOptionPane.YES_NO_OPTION);
+        if (confirm == javax.swing.JOptionPane.YES_OPTION) {
+            Object b = cbBarberos.getSelectedItem();
+            Object c = cbClientes.getSelectedItem();
+            Object f = cbFechas.getSelectedItem();
+            Object s = cbServicios.getSelectedItem();
+            System.out.println(b+","+c+","+f+","+s);
+            /**
+             * Agregar aqui el controlador de agregar cita
+             */
+            ViewMenuCitas vmc = new ViewMenuCitas();
+            vmc.setVisible(true);
+            this.dispose();
+        }
+    }
 
-    private void btnModificarCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarCitaActionPerformed
-        //
-    }//GEN-LAST:event_btnModificarCitaActionPerformed
+    private void btnModificarCitaActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        final int confirm = javax.swing.JOptionPane.showConfirmDialog(
+                        this, 
+                        "Seguro que quiere agregar la cita?",
+                        "Modificar cita",
+                        javax.swing.JOptionPane.WARNING_MESSAGE,
+                        javax.swing.JOptionPane.YES_NO_OPTION);
+        if (confirm == javax.swing.JOptionPane.YES_OPTION) {
+            /**
+             * Agregar aqui el controlador de modificar cita
+             */
+            ViewMenuCitas vmc = new ViewMenuCitas();
+            vmc.setVisible(true);
+            this.dispose();
+        }
+    }
 
-    private void btnEliminarCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarCitaActionPerformed
-        //
-    }//GEN-LAST:event_btnEliminarCitaActionPerformed
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        final int confirm = javax.swing.JOptionPane.showConfirmDialog(
+                        this, 
+                        "Seguro que quiere cancelar?",
+                        "Cancelar",
+                        javax.swing.JOptionPane.WARNING_MESSAGE,
+                        javax.swing.JOptionPane.YES_NO_OPTION);
+        if (confirm == javax.swing.JOptionPane.YES_OPTION) {
+            ViewMenuCitas vmc = new ViewMenuCitas();
+            vmc.setVisible(true);
+            this.dispose();
+        }
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void refreshCalendar(int month, int year) {
         // Allow/disallow buttons
@@ -522,17 +646,21 @@ public class ViewGestorCita extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private buttons.MetroButton btnAgregarCita;
-    private buttons.MetroButton btnEliminarCita;
+    private buttons.MetroButton btnCancelar;
     private buttons.MetroButton btnHamburgerMenu;
     private buttons.MetroButton btnLogo;
     private buttons.MetroButton btnModificarCita;
+    private javax.swing.JComboBox<String> cbBarberos;
+    private javax.swing.JComboBox<String> cbClientes;
+    private javax.swing.JComboBox<String> cbFechas;
+    private javax.swing.JComboBox<String> cbServicios;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel labelBarberos;
+    private javax.swing.JLabel labelClientes;
     private javax.swing.JLabel labelEmpresa;
+    private javax.swing.JLabel labelFecha;
+    private javax.swing.JLabel labelServicio;
     private javax.swing.JPanel pnlButtonsSection;
     private javax.swing.JPanel pnlCalendarSection;
     private javax.swing.JPanel pnlHambuergerButton;
