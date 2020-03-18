@@ -19,8 +19,12 @@ public class ControlCitas extends Control {
     }
     
     public void agregar(int id, Date fecha, Empleado barbero, Clientes cliente, Servicios servicio) {
-        Citas cita = new Citas(id, fecha, barbero, cliente, servicio);        
-        modelo.agregarCita(cita);
+        Citas cita = new Citas(id, fecha, barbero, cliente, servicio);
+        if (Periodo.comprobarCupo(listar(), cita)) {
+            modelo.agregarCita(cita);
+        } else {
+            // TODO: en caso contrario, mostrar mensaje de error al usuario
+        }
     }
     
     public void eliminar(int id) {

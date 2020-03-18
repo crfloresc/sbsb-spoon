@@ -13,7 +13,7 @@ public class AppBarberBrothers {
         
         ControlCitas control = new ControlCitas();
         
-        Date date = new Date(2020, 10, 10);
+        Date date = new Date((2020 - 1900), (10 - 1), 10, 16, 0);
         Empleado barbero = new Empleado(1);//HAY QUE REGISTRAR UN EMPLEADO CON EL ID:1 EN LA BD (A MANO)
         Clientes cliente  = new Clientes(2);//HAY QUE REGISTRAR UN CLIENTE CON EL ID:2 EN LA BD (A MANO)
         Servicios servicio = new Servicios(3);//HAY QUE REGISTRAR UN SERVICIO CON EL ID:3 EN LA BD (A MANO)  
