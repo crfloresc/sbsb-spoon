@@ -87,7 +87,7 @@ public class ViewMenuCitas extends javax.swing.JFrame {
         tblCalendar.getTableHeader().setResizingAllowed(false);
         tblCalendar.getTableHeader().setReorderingAllowed(false);
         
-        // 
+        // Table calendar header
         tblCalendar.getTableHeader().setFont(
                 new java.awt.Font("Tahoma", java.awt.Font.BOLD, 10)
         );
@@ -122,6 +122,17 @@ public class ViewMenuCitas extends javax.swing.JFrame {
         for (int i = 0; i < 10; i++) {
             model.insertRow(i, new Object[]{"DEFAULT", "DEFAULT", "DEFAULT", "DEFAULT"});
         }
+
+        // Table calendar header
+        tblSchedule.getTableHeader().setFont(
+                new java.awt.Font("Tahoma", java.awt.Font.BOLD, 10)
+        );
+        tblSchedule.getTableHeader().setBorder(
+                javax.swing.BorderFactory.createEmptyBorder()
+        );
+        tblSchedule.getTableHeader().setBackground(
+                new java.awt.Color(255, 255, 255)
+        );
     }
 
     @SuppressWarnings("unchecked")
@@ -144,13 +155,20 @@ public class ViewMenuCitas extends javax.swing.JFrame {
         btnEliminarCita = new buttons.MetroButton();
         pnlScheduleSection = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        mtblSchedule = new javax.swing.table.DefaultTableModel() {
+        mtblSchedule = new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null}
+            },
+            new String [] {
+                "Fecha y hora", "Cliente", "Barbero", "Servicio"
+            }
+        ) {
             @Override
             public boolean isCellEditable(int rowIndex, int mColIndex) {
                 return false;
             }
         };
-        tblSchedule = new javax.swing.JTable(mtblSchedule);
+        tblSchedule = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -336,14 +354,7 @@ public class ViewMenuCitas extends javax.swing.JFrame {
 
         tblSchedule.setBackground(new java.awt.Color(255, 255, 255));
         tblSchedule.setForeground(new java.awt.Color(0, 0, 0));
-        tblSchedule.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null}
-            },
-            new String [] {
-                "Fecha y hora", "Cliente", "Barbero", "Servicio"
-            }
-        ));
+        tblSchedule.setModel(mtblSchedule);
         jScrollPane1.setViewportView(tblSchedule);
         refreshSchedule();
 
