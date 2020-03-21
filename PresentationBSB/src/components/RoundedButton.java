@@ -1,4 +1,4 @@
-package buttons;
+package components;
 
 import java.awt.Color;
 import java.awt.Cursor;

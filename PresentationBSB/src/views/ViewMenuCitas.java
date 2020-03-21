@@ -2,7 +2,7 @@ package views;
 
 import java.util.GregorianCalendar;
 
-import buttons.TableCalendarRender;
+import components.table.TableCalendarRender;
 import components.table.TableScheduleRender;
 
 public class ViewMenuCitas extends javax.swing.JFrame {
@@ -11,8 +11,8 @@ public class ViewMenuCitas extends javax.swing.JFrame {
     private javax.swing.JComboBox cmbYear;
     private javax.swing.JButton btnPrev;
     private javax.swing.JButton btnNext;
-    private javax.swing.table.DefaultTableModel mtblCalendar;
-    private components.table.ScheduleTableModel mtblSchedule;
+    private components.table.model.CalendarTableModel mtblCalendar;
+    private components.table.model.ScheduleTableModel mtblSchedule;
     private javax.swing.JTable tblCalendar;
     private javax.swing.JScrollPane stblCalendar;
     private javax.swing.JPanel pnlCalendar;
@@ -23,17 +23,11 @@ public class ViewMenuCitas extends javax.swing.JFrame {
         // Create controls
         lblMonth = new javax.swing.JLabel("Enero");
         cmbYear = new javax.swing.JComboBox();
-        btnPrev = new buttons.MetroButton("<-");
-        btnNext = new buttons.MetroButton("->");
-        mtblCalendar = new javax.swing.table.DefaultTableModel() {
-            @Override
-            public boolean isCellEditable(int rowIndex, int mColIndex) {
-                return false;
-            }
-        };
+        btnPrev = new components.MetroButton("<-");
+        btnNext = new components.MetroButton("->");
+        mtblCalendar = new components.table.model.CalendarTableModel();
         tblCalendar = new javax.swing.JTable(mtblCalendar);
         stblCalendar = new javax.swing.JScrollPane(tblCalendar);
-        // pnlCalendar = new javax.swing.JPanel();
 
         // Set border
         pnlCalendarSection.setBorder(javax.swing.BorderFactory.createTitledBorder("Calendario"));
@@ -73,14 +67,6 @@ public class ViewMenuCitas extends javax.swing.JFrame {
         currentMonth = realMonth; //Match month and year
         currentYear = realYear;
 
-        // Add headers
-        /*for (int i = 0; i < 7; i++) {
-            mtblCalendar.addColumn(CalendarConst.HEADERS[i]);
-        }*/
-        for (String h : CalendarConst.HEADERS) {
-            mtblCalendar.addColumn(h);
-        }
-
         tblCalendar.getParent().setBackground(tblCalendar.getBackground()); //Set background
 
         // No resize/reorder
@@ -105,8 +91,8 @@ public class ViewMenuCitas extends javax.swing.JFrame {
 
         // Set row/column count
         tblCalendar.setRowHeight(38);
-        mtblCalendar.setColumnCount(7);
-        mtblCalendar.setRowCount(6);
+        //mtblCalendar.setColumnCount(7);
+        //mtblCalendar.setRowCount(6);
 
         // Populate table
         for (int i = realYear - 2; i <= realYear + 2; i++) {
@@ -137,18 +123,18 @@ public class ViewMenuCitas extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         labelEmpresa = new javax.swing.JLabel();
-        btnLogo = new buttons.MetroButton();
+        btnLogo = new components.MetroButton();
         pnlHambuergerButton = new javax.swing.JPanel();
-        btnHamburgerMenu = new buttons.MetroButton();
+        btnHamburgerMenu = new components.MetroButton();
         pnlHamburgerMenu = new javax.swing.JPanel();
         pnlCalendarSection = new javax.swing.JPanel();
         pnlButtonsSection = new javax.swing.JPanel();
-        btnAgregarCita = new buttons.MetroButton();
-        btnModificarCita = new buttons.MetroButton();
-        btnEliminarCita = new buttons.MetroButton();
+        btnAgregarCita = new components.MetroButton();
+        btnModificarCita = new components.MetroButton();
+        btnEliminarCita = new components.MetroButton();
         pnlScheduleSection = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        mtblSchedule = new components.table.ScheduleTableModel();
+        mtblSchedule = new components.table.model.ScheduleTableModel();
         tblSchedule = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -483,12 +469,8 @@ public class ViewMenuCitas extends javax.swing.JFrame {
         lblMonth.setBounds(160 - lblMonth.getPreferredSize().width / 2, 25, 180, 25); //Re-align label with calendar
         cmbYear.setSelectedItem(String.valueOf(year)); //Select the correct year in the combo box
 
-        // Clear table
-        for (int i = 0; i < 6; i++) {
-            for (int j = 0; j < 7; j++) {
-                mtblCalendar.setValueAt(null, i, j);
-            }
-        }
+        // Clear data table
+        mtblCalendar.clearData();
 
         // Get first day of month and number of days
         GregorianCalendar cal = new GregorianCalendar(year, month, 1);
@@ -496,16 +478,7 @@ public class ViewMenuCitas extends javax.swing.JFrame {
         int som = cal.get(GregorianCalendar.DAY_OF_WEEK);
 
         // Draw calendar
-        for (int i = 1; i <= nod; i++) {
-            int row = (i + som - 2) / 7;
-            int column  =  (i + som - 2) % 7;
-            
-            mtblCalendar.addTableModelListener((javax.swing.event.TableModelEvent tme) -> {
-                if (tme.getType() == javax.swing.event.TableModelEvent.UPDATE) {
-                }
-            });
-            mtblCalendar.setValueAt(i, row, column);
-        }
+        mtblCalendar.drawCalendar(nod, som);
 
         // Apply renderers
         tblCalendar.setDefaultRenderer(
@@ -591,7 +564,6 @@ public class ViewMenuCitas extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(ViewMenuCitas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
         
         java.awt.EventQueue.invokeLater(() -> {
             new ViewMenuCitas().setVisible(true);
@@ -599,11 +571,11 @@ public class ViewMenuCitas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private buttons.MetroButton btnAgregarCita;
-    private buttons.MetroButton btnEliminarCita;
-    private buttons.MetroButton btnHamburgerMenu;
-    private buttons.MetroButton btnLogo;
-    private buttons.MetroButton btnModificarCita;
+    private components.MetroButton btnAgregarCita;
+    private components.MetroButton btnEliminarCita;
+    private components.MetroButton btnHamburgerMenu;
+    private components.MetroButton btnLogo;
+    private components.MetroButton btnModificarCita;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;

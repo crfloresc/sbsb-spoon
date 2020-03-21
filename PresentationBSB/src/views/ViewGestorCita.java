@@ -2,7 +2,7 @@ package views;
 
 import java.util.GregorianCalendar;
 
-import buttons.TableCalendarRender;
+import components.table.TableCalendarRender;
 
 public class ViewGestorCita extends javax.swing.JFrame {
 
@@ -38,8 +38,8 @@ public class ViewGestorCita extends javax.swing.JFrame {
         // Create controls
         lblMonth = new javax.swing.JLabel("Enero");
         cmbYear = new javax.swing.JComboBox();
-        btnPrev = new buttons.MetroButton("<-");
-        btnNext = new buttons.MetroButton("->");
+        btnPrev = new components.MetroButton("<-");
+        btnNext = new components.MetroButton("->");
         mtblCalendar = new javax.swing.table.DefaultTableModel() {
             @Override
             public boolean isCellEditable(int rowIndex, int mColIndex) {
@@ -141,21 +141,21 @@ public class ViewGestorCita extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         labelEmpresa = new javax.swing.JLabel();
-        btnLogo = new buttons.MetroButton();
+        btnLogo = new components.MetroButton();
         pnlHambuergerButton = new javax.swing.JPanel();
-        btnHamburgerMenu = new buttons.MetroButton();
+        btnHamburgerMenu = new components.MetroButton();
         pnlHamburgerMenu = new javax.swing.JPanel();
         pnlCalendarSection = new javax.swing.JPanel();
         pnlButtonsSection = new javax.swing.JPanel();
         if (tipo == ViewGestorCita.MODIFICAR) {
             isDisabledAgregar = true;
         }
-        btnAgregarCita = new buttons.MetroButton(isDisabledAgregar);
+        btnAgregarCita = new components.MetroButton(isDisabledAgregar);
         if (tipo == ViewGestorCita.AGREGAR) {
             isDisabledModificar = true;
         }
-        btnModificarCita = new buttons.MetroButton(isDisabledModificar);
-        btnCancelar = new buttons.MetroButton();
+        btnModificarCita = new components.MetroButton(isDisabledModificar);
+        btnCancelar = new components.MetroButton();
         pnlScheduleSection = new javax.swing.JPanel();
         cbBarberos = new javax.swing.JComboBox<>();
         cbClientes = new javax.swing.JComboBox<>();
@@ -645,11 +645,11 @@ public class ViewGestorCita extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private buttons.MetroButton btnAgregarCita;
-    private buttons.MetroButton btnCancelar;
-    private buttons.MetroButton btnHamburgerMenu;
-    private buttons.MetroButton btnLogo;
-    private buttons.MetroButton btnModificarCita;
+    private components.MetroButton btnAgregarCita;
+    private components.MetroButton btnCancelar;
+    private components.MetroButton btnHamburgerMenu;
+    private components.MetroButton btnLogo;
+    private components.MetroButton btnModificarCita;
     private javax.swing.JComboBox<String> cbBarberos;
     private javax.swing.JComboBox<String> cbClientes;
     private javax.swing.JComboBox<String> cbFechas;

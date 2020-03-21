@@ -1,4 +1,4 @@
-package buttons;
+package components.table;
 
 import java.awt.Color;
 import java.awt.Component;

@@ -189,7 +189,7 @@
                 <Property name="text" type="java.lang.String" value="Barber Brothers"/>
               </Properties>
             </Component>
-            <Component class="buttons.MetroButton" name="btnLogo">
+            <Component class="components.MetroButton" name="btnLogo">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -250,7 +250,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="buttons.MetroButton" name="btnHamburgerMenu">
+            <Component class="components.MetroButton" name="btnHamburgerMenu">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -367,7 +367,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="buttons.MetroButton" name="btnAgregarCita">
+            <Component class="components.MetroButton" name="btnAgregarCita">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Agregar cita"/>
                 <Property name="colorBorde" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -378,7 +378,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAgregarCitaActionPerformed"/>
               </Events>
             </Component>
-            <Component class="buttons.MetroButton" name="btnModificarCita">
+            <Component class="components.MetroButton" name="btnModificarCita">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Modificar cita"/>
                 <Property name="colorBorde" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -389,7 +389,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnModificarCitaActionPerformed"/>
               </Events>
             </Component>
-            <Component class="buttons.MetroButton" name="btnEliminarCita">
+            <Component class="components.MetroButton" name="btnEliminarCita">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="0" green="0" red="cc" type="rgb"/>
@@ -469,7 +469,7 @@
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="refreshSchedule();"/>
                     <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable()"/>
-                    <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="mtblSchedule = new components.table.ScheduleTableModel();"/>
+                    <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="mtblSchedule = new components.table.model.ScheduleTableModel();"/>
                   </AuxValues>
                 </Component>
               </SubComponents>
