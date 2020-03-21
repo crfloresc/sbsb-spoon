@@ -469,7 +469,7 @@
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="refreshSchedule();"/>
                     <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable()"/>
-                    <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="mtblSchedule = new javax.swing.table.DefaultTableModel(&#xa;    new Object [][] {&#xa;        {null, null, null, null}&#xa;    },&#xa;    new String [] {&#xa;        &quot;Fecha y hora&quot;, &quot;Cliente&quot;, &quot;Barbero&quot;, &quot;Servicio&quot;&#xa;    }&#xa;) {&#xa;    @Override&#xa;    public boolean isCellEditable(int rowIndex, int mColIndex) {&#xa;        return false;&#xa;    }&#xa;};"/>
+                    <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="mtblSchedule = new components.table.ScheduleTableModel();"/>
                   </AuxValues>
                 </Component>
               </SubComponents>

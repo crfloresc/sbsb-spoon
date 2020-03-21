@@ -3,7 +3,7 @@ package views;
 import java.util.GregorianCalendar;
 
 import buttons.TableCalendarRender;
-import buttons.TableScheduleRender;
+import components.table.TableScheduleRender;
 
 public class ViewMenuCitas extends javax.swing.JFrame {
 
@@ -12,7 +12,7 @@ public class ViewMenuCitas extends javax.swing.JFrame {
     private javax.swing.JButton btnPrev;
     private javax.swing.JButton btnNext;
     private javax.swing.table.DefaultTableModel mtblCalendar;
-    private javax.swing.table.DefaultTableModel mtblSchedule;
+    private components.table.ScheduleTableModel mtblSchedule;
     private javax.swing.JTable tblCalendar;
     private javax.swing.JScrollPane stblCalendar;
     private javax.swing.JPanel pnlCalendar;
@@ -116,13 +116,6 @@ public class ViewMenuCitas extends javax.swing.JFrame {
         // Refresh calendar
         refreshCalendar(realMonth, realYear);
 
-        // Setup schedule
-        javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) tblSchedule.getModel();
-        model.setRowCount(0);
-        for (int i = 0; i < 10; i++) {
-            model.insertRow(i, new Object[]{"DEFAULT", "DEFAULT", "DEFAULT", "DEFAULT"});
-        }
-
         // Table calendar header
         tblSchedule.getTableHeader().setFont(
                 new java.awt.Font("Tahoma", java.awt.Font.BOLD, 10)
@@ -155,19 +148,7 @@ public class ViewMenuCitas extends javax.swing.JFrame {
         btnEliminarCita = new buttons.MetroButton();
         pnlScheduleSection = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        mtblSchedule = new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null}
-            },
-            new String [] {
-                "Fecha y hora", "Cliente", "Barbero", "Servicio"
-            }
-        ) {
-            @Override
-            public boolean isCellEditable(int rowIndex, int mColIndex) {
-                return false;
-            }
-        };
+        mtblSchedule = new components.table.ScheduleTableModel();
         tblSchedule = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
