@@ -78,8 +78,8 @@ public class ViewMenuCitas extends javax.swing.JFrame {
 
         pnlMain = new javax.swing.JPanel();
         pnlHeader = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        btnAccount = new javax.swing.JButton();
+        labelUsuario = new javax.swing.JLabel();
         labelEmpresa = new javax.swing.JLabel();
         btnLogo = new components.MetroButton();
         pnlHambuergerButton = new javax.swing.JPanel();
@@ -91,7 +91,7 @@ public class ViewMenuCitas extends javax.swing.JFrame {
         btnModificarCita = new components.MetroButton();
         btnEliminarCita = new components.MetroButton();
         pnlScheduleSection = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        scrollPnlSchedule = new javax.swing.JScrollPane();
         tblSchedule = new components.table.TableSchedule();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -105,12 +105,12 @@ public class ViewMenuCitas extends javax.swing.JFrame {
         pnlHeader.setForeground(new java.awt.Color(255, 255, 255));
         pnlHeader.setPreferredSize(new java.awt.Dimension(881, 50));
 
-        jButton1.setText("&lt;&lt;");
-        jButton1.setFocusPainted(false);
+        btnAccount.setText("&lt;&lt;");
+        btnAccount.setFocusPainted(false);
 
-        jLabel1.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("Herman Flores");
+        labelUsuario.setBackground(new java.awt.Color(0, 0, 0));
+        labelUsuario.setForeground(new java.awt.Color(0, 0, 0));
+        labelUsuario.setText("Herman Flores");
 
         labelEmpresa.setBackground(new java.awt.Color(0, 0, 0));
         labelEmpresa.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -134,9 +134,9 @@ public class ViewMenuCitas extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(labelEmpresa)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 381, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                .addComponent(labelUsuario)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
+                .addComponent(btnAccount)
                 .addGap(12, 12, 12))
         );
         pnlHeaderLayout.setVerticalGroup(
@@ -145,13 +145,13 @@ public class ViewMenuCitas extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlHeaderLayout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(btnAccount)
                         .addContainerGap(11, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlHeaderLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlHeaderLayout.createSequentialGroup()
-                                .addComponent(jLabel1)
+                                .addComponent(labelUsuario)
                                 .addGap(16, 16, 16))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlHeaderLayout.createSequentialGroup()
                                 .addComponent(labelEmpresa)
@@ -276,7 +276,11 @@ public class ViewMenuCitas extends javax.swing.JFrame {
         pnlScheduleSection.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         pnlScheduleSection.setForeground(new java.awt.Color(204, 204, 204));
 
-        jScrollPane1.setViewportView(tblSchedule);
+        /**/
+        tblSchedule.setBackground(new java.awt.Color(255, 255, 255));
+        tblSchedule.setForeground(new java.awt.Color(0, 0, 0));
+        tblSchedule.setModel(mtblSchedule);
+        scrollPnlSchedule.setViewportView(tblSchedule);
         tblSchedule.applyRender();
 
         javax.swing.GroupLayout pnlScheduleSectionLayout = new javax.swing.GroupLayout(pnlScheduleSection);
@@ -285,14 +289,14 @@ public class ViewMenuCitas extends javax.swing.JFrame {
             pnlScheduleSectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlScheduleSectionLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
+                .addComponent(scrollPnlSchedule)
                 .addContainerGap())
         );
         pnlScheduleSectionLayout.setVerticalGroup(
             pnlScheduleSectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlScheduleSectionLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(scrollPnlSchedule, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -505,16 +509,14 @@ public class ViewMenuCitas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAccount;
     private components.MetroButton btnAgregarCita;
     private components.MetroButton btnEliminarCita;
     private components.MetroButton btnHamburgerMenu;
     private components.MetroButton btnLogo;
     private components.MetroButton btnModificarCita;
-    private components.table.TableSchedule tblSchedule;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelEmpresa;
+    private javax.swing.JLabel labelUsuario;
     private javax.swing.JPanel pnlButtonsSection;
     private javax.swing.JPanel pnlCalendarSection;
     private javax.swing.JPanel pnlHambuergerButton;
@@ -522,5 +524,7 @@ public class ViewMenuCitas extends javax.swing.JFrame {
     private javax.swing.JPanel pnlHeader;
     private javax.swing.JPanel pnlMain;
     private javax.swing.JPanel pnlScheduleSection;
+    private javax.swing.JScrollPane scrollPnlSchedule;
+    private javax.swing.JTable tblSchedule;
     // End of variables declaration//GEN-END:variables
 }
