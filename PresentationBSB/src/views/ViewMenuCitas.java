@@ -2,8 +2,6 @@ package views;
 
 import java.util.GregorianCalendar;
 
-import components.table.render.TableScheduleRender;
-
 public class ViewMenuCitas extends javax.swing.JFrame {
 
     private javax.swing.JLabel lblMonth;
@@ -65,24 +63,13 @@ public class ViewMenuCitas extends javax.swing.JFrame {
         currentMonth = realMonth; //Match month and year
         currentYear = realYear;
 
-        // Populate table
+        // Populate combo box
         for (int i = realYear - 2; i <= realYear + 2; i++) {
             cmbYear.addItem(String.valueOf(i));
         }
 
         // Refresh calendar
         refreshCalendar(realMonth, realYear);
-
-        // Table calendar header
-        tblSchedule.getTableHeader().setFont(
-                new java.awt.Font("Tahoma", java.awt.Font.BOLD, 10)
-        );
-        tblSchedule.getTableHeader().setBorder(
-                javax.swing.BorderFactory.createEmptyBorder()
-        );
-        tblSchedule.getTableHeader().setBackground(
-                new java.awt.Color(255, 255, 255)
-        );
     }
 
     @SuppressWarnings("unchecked")
@@ -105,8 +92,7 @@ public class ViewMenuCitas extends javax.swing.JFrame {
         btnEliminarCita = new components.MetroButton();
         pnlScheduleSection = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        mtblSchedule = new components.table.model.ScheduleTableModel();
-        tblSchedule = new javax.swing.JTable();
+        tblSchedule = new components.table.TableSchedule();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -290,11 +276,8 @@ public class ViewMenuCitas extends javax.swing.JFrame {
         pnlScheduleSection.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         pnlScheduleSection.setForeground(new java.awt.Color(204, 204, 204));
 
-        tblSchedule.setBackground(new java.awt.Color(255, 255, 255));
-        tblSchedule.setForeground(new java.awt.Color(0, 0, 0));
-        tblSchedule.setModel(mtblSchedule);
         jScrollPane1.setViewportView(tblSchedule);
-        refreshSchedule();
+        tblSchedule.applyRender();
 
         javax.swing.GroupLayout pnlScheduleSectionLayout = new javax.swing.GroupLayout(pnlScheduleSection);
         pnlScheduleSection.setLayout(pnlScheduleSectionLayout);
@@ -455,13 +438,6 @@ public class ViewMenuCitas extends javax.swing.JFrame {
         tblCalendar.applyRender(realYear, realMonth, realDay, currentYear, currentMonth);
     }
 
-    private void refreshSchedule() {
-        tblSchedule.setDefaultRenderer(
-                tblSchedule.getColumnClass(0),
-                new TableScheduleRender()
-        );
-    }
-
     private void btnPrevActionPerformed(java.awt.event.ActionEvent evt) {
         if (currentMonth == 0) { // Back one year
             currentMonth = 11;
@@ -534,6 +510,7 @@ public class ViewMenuCitas extends javax.swing.JFrame {
     private components.MetroButton btnHamburgerMenu;
     private components.MetroButton btnLogo;
     private components.MetroButton btnModificarCita;
+    private components.table.TableSchedule tblSchedule;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -545,6 +522,5 @@ public class ViewMenuCitas extends javax.swing.JFrame {
     private javax.swing.JPanel pnlHeader;
     private javax.swing.JPanel pnlMain;
     private javax.swing.JPanel pnlScheduleSection;
-    private javax.swing.JTable tblSchedule;
     // End of variables declaration//GEN-END:variables
 }

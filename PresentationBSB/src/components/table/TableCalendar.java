@@ -19,15 +19,15 @@ public class TableCalendar extends JTable {
 
     public TableCalendar() {
         super(new CalendarTableModel());
-        initConfigHeader();
-        initDesignHeader();
-        initCellSelection();
-        initSize();
-        initGridHeader();
+        initDefault();
     }
 
     public TableCalendar(TableModel tm) {
         super(tm);
+        initDefault();
+    }
+
+    private void initDefault() {
         initConfigHeader();
         initDesignHeader();
         initCellSelection();
