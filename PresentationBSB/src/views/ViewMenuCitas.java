@@ -45,11 +45,10 @@ public class ViewMenuCitas extends javax.swing.JFrame {
         cmbYear.setBounds(130 - cmbYear.getPreferredSize().width / 2, 305, 80, 20);
 
         // Get real month/year
-        GregorianCalendar cal = new GregorianCalendar(); //Create calendar
-        realDay = cal.get(GregorianCalendar.DAY_OF_MONTH); //Get day
-        realMonth = cal.get(GregorianCalendar.MONTH); //Get month
-        realYear = cal.get(GregorianCalendar.YEAR); //Get year
-        currentMonth = realMonth; //Match month and year
+        realDay = Calendar.getRealDay();
+        realMonth = Calendar.getRealMonth();
+        realYear = Calendar.getRealYear();
+        currentMonth = realMonth;
         currentYear = realYear;
 
         // Populate combo box
@@ -416,9 +415,8 @@ public class ViewMenuCitas extends javax.swing.JFrame {
         mtblCalendar.clearData();
 
         // Get first day of month and number of days
-        GregorianCalendar cal = new GregorianCalendar(year, month, 1);
-        int nod = cal.getActualMaximum(GregorianCalendar.DAY_OF_MONTH);
-        int som = cal.get(GregorianCalendar.DAY_OF_WEEK);
+        int nod = Calendar.getNod(year, month);
+        int som = Calendar.getSom(year, month);
 
         // Draw calendar
         mtblCalendar.drawCalendar(nod, som);
@@ -491,6 +489,33 @@ public class ViewMenuCitas extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(() -> {
             new ViewMenuCitas().setVisible(true);
         });
+    }
+
+    public static class Calendar {
+
+        private static GregorianCalendar c = new GregorianCalendar();
+
+        public static int getRealDay() {
+            return c.get(GregorianCalendar.DAY_OF_MONTH);
+        }
+
+        public static int getRealMonth() {
+            return c.get(GregorianCalendar.MONTH);
+        }
+
+        public static int getRealYear() {
+            return c.get(GregorianCalendar.YEAR);
+        }
+
+        public static int getNod(int year, int month) {
+            GregorianCalendar calendar = new GregorianCalendar(year, month, 1);
+            return calendar.getActualMaximum(GregorianCalendar.DAY_OF_MONTH);
+        }
+
+        public static int getSom(int year, int month) {
+            GregorianCalendar calendar = new GregorianCalendar(year, month, 1);
+            return calendar.get(GregorianCalendar.DAY_OF_WEEK);
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
