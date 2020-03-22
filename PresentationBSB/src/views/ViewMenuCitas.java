@@ -4,17 +4,6 @@ import java.util.GregorianCalendar;
 
 public class ViewMenuCitas extends javax.swing.JFrame {
 
-    private javax.swing.JLabel lblMonth;
-    private javax.swing.JComboBox cmbYear;
-    private javax.swing.JButton btnPrev;
-    private javax.swing.JButton btnNext;
-    private components.table.model.CalendarTableModel mtblCalendar;
-    private components.table.model.ScheduleTableModel mtblSchedule;
-    private components.table.TableCalendar tblCalendar;
-    private javax.swing.JScrollPane stblCalendar;
-    private javax.swing.JPanel pnlCalendar;
-    private int realYear, realMonth, realDay, currentYear, currentMonth;
-
     public ViewMenuCitas() {
         initComponents();
         // Create controls
@@ -276,10 +265,6 @@ public class ViewMenuCitas extends javax.swing.JFrame {
         pnlScheduleSection.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         pnlScheduleSection.setForeground(new java.awt.Color(204, 204, 204));
 
-        /**/
-        tblSchedule.setBackground(new java.awt.Color(255, 255, 255));
-        tblSchedule.setForeground(new java.awt.Color(0, 0, 0));
-        tblSchedule.setModel(mtblSchedule);
         scrollPnlSchedule.setViewportView(tblSchedule);
         tblSchedule.applyRender();
 
@@ -364,7 +349,7 @@ public class ViewMenuCitas extends javax.swing.JFrame {
             vgc.setVisible(true);
             this.dispose();
         } else {
-            javax.swing.JOptionPane.showMessageDialog(this, "No se ha seleccionado ningun dato!");
+            javax.swing.JOptionPane.showMessageDialog(this, "No se ha seleccionado ningun dato del calendario!");
         }
     }//GEN-LAST:event_btnAgregarCitaActionPerformed
 
@@ -381,7 +366,7 @@ public class ViewMenuCitas extends javax.swing.JFrame {
             vgc.setVisible(true);
             this.dispose();
         } else {
-            javax.swing.JOptionPane.showMessageDialog(this, "No se ha seleccionado ningun dato!");
+            javax.swing.JOptionPane.showMessageDialog(this, "No se ha seleccionado ningun dato de la agenda!");
         }
     }//GEN-LAST:event_btnModificarCitaActionPerformed
 
@@ -406,10 +391,10 @@ public class ViewMenuCitas extends javax.swing.JFrame {
                     javax.swing.JOptionPane.showMessageDialog(this, "Se elimino correctamente");
                 }
             } else {
-                javax.swing.JOptionPane.showMessageDialog(this, "No se ha seleccionado ningun dato!");
+                javax.swing.JOptionPane.showMessageDialog(this, "No se ha seleccionado ningun dato de la agenda!");
             }
         } else {
-            javax.swing.JOptionPane.showMessageDialog(this, "No se ha seleccionado ningun dato!");
+            javax.swing.JOptionPane.showMessageDialog(this, "No se ha seleccionado ningun dato de la agenda!");
         }
     }//GEN-LAST:event_btnEliminarCitaActionPerformed
 
@@ -525,6 +510,16 @@ public class ViewMenuCitas extends javax.swing.JFrame {
     private javax.swing.JPanel pnlMain;
     private javax.swing.JPanel pnlScheduleSection;
     private javax.swing.JScrollPane scrollPnlSchedule;
-    private javax.swing.JTable tblSchedule;
+    private components.table.TableSchedule tblSchedule;
+    private javax.swing.JLabel lblMonth;
+    private javax.swing.JComboBox cmbYear;
+    private javax.swing.JButton btnPrev;
+    private javax.swing.JButton btnNext;
+    private components.table.model.CalendarTableModel mtblCalendar;
+    private components.table.model.ScheduleTableModel mtblSchedule;
+    private components.table.TableCalendar tblCalendar;
+    private javax.swing.JScrollPane stblCalendar;
+    private javax.swing.JPanel pnlCalendar;
+    private int realYear, realMonth, realDay, currentYear, currentMonth;
     // End of variables declaration//GEN-END:variables
 }
