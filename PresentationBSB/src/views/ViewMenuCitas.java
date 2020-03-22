@@ -6,6 +6,7 @@ public class ViewMenuCitas extends javax.swing.JFrame {
 
     public ViewMenuCitas() {
         initComponents();
+        setTitle("Menu de citas");
         // Create controls
         lblMonth = new javax.swing.JLabel("Enero");
         cmbYear = new javax.swing.JComboBox();

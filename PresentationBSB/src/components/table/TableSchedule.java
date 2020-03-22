@@ -3,6 +3,7 @@ package components.table;
 import components.table.model.ScheduleTableModel;
 import components.table.render.TableScheduleRender;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import javax.swing.BorderFactory;
 import javax.swing.JTable;
@@ -32,6 +33,7 @@ public class TableSchedule extends JTable {
         initConfigHeader();
         initDesignHeader();
         initDesignBody();
+        initGridBody();
     }
 
     /**
@@ -40,6 +42,7 @@ public class TableSchedule extends JTable {
     private void initConfigHeader() {
         getTableHeader().setResizingAllowed(false);
         getTableHeader().setReorderingAllowed(false);
+        getTableHeader().setSize(new Dimension(0, 1));
     }
 
     private void initDesignHeader() {
@@ -51,6 +54,12 @@ public class TableSchedule extends JTable {
     private void initDesignBody() {
         setBackground(B_BG_PRIMARY);
         setForeground(B_FG_PRIMARY);
+    }
+
+    private void initGridBody() {
+        setShowVerticalLines(false);
+        setRowHeight(25);
+        setIntercellSpacing(new Dimension(0, 1));
     }
 
     public void applyRender() {

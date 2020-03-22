@@ -2,6 +2,8 @@ package components.table.render;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Font;
+import javax.swing.BorderFactory;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
@@ -23,8 +25,8 @@ public class TableCalendarRender extends DefaultTableCellRenderer {
     private void init() {
         setForeground(Color.black);
         setHorizontalAlignment(CENTER);
-        setFont(new java.awt.Font("Tahoma", java.awt.Font.BOLD, 10));
-        setBorder(javax.swing.BorderFactory.createEmptyBorder());
+        setFont(new Font("Tahoma", Font.BOLD, 10));
+        setBorder(BorderFactory.createEmptyBorder());
     }
 
     @Override
@@ -38,7 +40,7 @@ public class TableCalendarRender extends DefaultTableCellRenderer {
         }
         if (value != null) {
             if (selected) {
-                setBackground(new Color(0, 0, 0));
+                setBackground(new Color(160, 160, 160));
             } else {
                 if (Integer.parseInt(value.toString()) == realDay && currentMonth == realMonth && currentYear == realYear) { // Today
                     setBackground(new Color(220, 220, 255));
