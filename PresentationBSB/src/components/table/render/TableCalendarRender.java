@@ -1,4 +1,4 @@
-package components.table;
+package components.table.render;
 
 import java.awt.Color;
 import java.awt.Component;

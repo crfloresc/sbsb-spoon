@@ -2,7 +2,7 @@ package views;
 
 import java.util.GregorianCalendar;
 
-import components.table.TableCalendarRender;
+import components.table.render.TableCalendarRender;
 
 public class ViewGestorCita extends javax.swing.JFrame {
 

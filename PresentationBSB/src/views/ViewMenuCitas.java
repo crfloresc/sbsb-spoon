@@ -2,8 +2,7 @@ package views;
 
 import java.util.GregorianCalendar;
 
-import components.table.TableCalendarRender;
-import components.table.TableScheduleRender;
+import components.table.render.TableScheduleRender;
 
 public class ViewMenuCitas extends javax.swing.JFrame {
 
@@ -13,7 +12,7 @@ public class ViewMenuCitas extends javax.swing.JFrame {
     private javax.swing.JButton btnNext;
     private components.table.model.CalendarTableModel mtblCalendar;
     private components.table.model.ScheduleTableModel mtblSchedule;
-    private javax.swing.JTable tblCalendar;
+    private components.table.TableCalendar tblCalendar;
     private javax.swing.JScrollPane stblCalendar;
     private javax.swing.JPanel pnlCalendar;
     private int realYear, realMonth, realDay, currentYear, currentMonth;
@@ -25,8 +24,8 @@ public class ViewMenuCitas extends javax.swing.JFrame {
         cmbYear = new javax.swing.JComboBox();
         btnPrev = new components.MetroButton("<-");
         btnNext = new components.MetroButton("->");
-        mtblCalendar = new components.table.model.CalendarTableModel();
-        tblCalendar = new javax.swing.JTable(mtblCalendar);
+        tblCalendar = new components.table.TableCalendar();
+        mtblCalendar = (components.table.model.CalendarTableModel) tblCalendar.getModel();
         stblCalendar = new javax.swing.JScrollPane(tblCalendar);
 
         // Set border
@@ -44,7 +43,6 @@ public class ViewMenuCitas extends javax.swing.JFrame {
         });
 
         // Add controls to pane
-        // pnlCalendarSection.add(pnlCalendar);
         pnlCalendarSection.add(lblMonth);
         pnlCalendarSection.add(cmbYear);
         pnlCalendarSection.add(btnPrev);
@@ -66,33 +64,6 @@ public class ViewMenuCitas extends javax.swing.JFrame {
         realYear = cal.get(GregorianCalendar.YEAR); //Get year
         currentMonth = realMonth; //Match month and year
         currentYear = realYear;
-
-        tblCalendar.getParent().setBackground(tblCalendar.getBackground()); //Set background
-
-        // No resize/reorder
-        tblCalendar.getTableHeader().setResizingAllowed(false);
-        tblCalendar.getTableHeader().setReorderingAllowed(false);
-        
-        // Table calendar header
-        tblCalendar.getTableHeader().setFont(
-                new java.awt.Font("Tahoma", java.awt.Font.BOLD, 10)
-        );
-        tblCalendar.getTableHeader().setBorder(
-                javax.swing.BorderFactory.createEmptyBorder()
-        );
-        tblCalendar.getTableHeader().setBackground(
-                new java.awt.Color(255, 255, 255)
-        );
-
-        // Single cell selection
-        tblCalendar.setColumnSelectionAllowed(true);
-        tblCalendar.setRowSelectionAllowed(true);
-        tblCalendar.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-
-        // Set row/column count
-        tblCalendar.setRowHeight(38);
-        //mtblCalendar.setColumnCount(7);
-        //mtblCalendar.setRowCount(6);
 
         // Populate table
         for (int i = realYear - 2; i <= realYear + 2; i++) {
@@ -481,20 +452,7 @@ public class ViewMenuCitas extends javax.swing.JFrame {
         mtblCalendar.drawCalendar(nod, som);
 
         // Apply renderers
-        tblCalendar.setDefaultRenderer(
-                tblCalendar.getColumnClass(0),
-                new TableCalendarRender(
-                        realYear,
-                        realMonth,
-                        realDay,
-                        currentYear,
-                        currentMonth
-                )
-        );
-        tblCalendar.setShowGrid(false);
-        tblCalendar.setIntercellSpacing(new java.awt.Dimension(0,0));
-        /*tblCalendar.setShowHorizontalLines(false);
-        tblCalendar.setShowVerticalLines(false);*/
+        tblCalendar.applyRender(realYear, realMonth, realDay, currentYear, currentMonth);
     }
 
     private void refreshSchedule() {
