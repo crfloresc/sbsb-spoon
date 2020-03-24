@@ -26,30 +26,26 @@ public class Periodo {
      * registradas y calcula el inicio y el final de la fecha para la cita a
      * añadir para comparar si no tiene conflicto con una cita agendada.
      *
-     * @param nueva_cita cita a agregar en el calendario
+     * @param cita cita a agregar en el calendario
      * @return true si es posible agregar la cita, false en caso contrario
      */
-    static boolean comprobarCupo(List lista, Citas nueva_cita) {
-        Date inicio_cita = nueva_cita.getFecha();
-        Date fin_cita = DateUtils.addMinutes(inicio_cita, nueva_cita.getServicio().getDuracion());
-        
-        for (Iterator iterator = lista.iterator(); iterator.hasNext();) {
-            Citas cita = (Citas) iterator.next();
-            Date inicio_servicio = cita.getFecha();
-            Date fin_servicio = DateUtils.addMinutes(cita.getFecha(), cita.getServicio().getDuracion());
+    static boolean comprobarCupo(List lista, Citas cita) {
+        Date inicio_cita = DateUtils.truncate(cita.getFecha(), Calendar.MINUTE);
+        Date fin_cita = DateUtils.addMinutes(inicio_cita, cita.getServicio().getDuracion());
 
-            boolean esta_ocupando = (DateUtils.truncatedCompareTo(inicio_cita, inicio_servicio, Calendar.MINUTE) >= 0
-                    && DateUtils.truncatedCompareTo(inicio_cita, fin_servicio, Calendar.MINUTE) < 0)
-                    || (DateUtils.truncatedCompareTo(fin_cita, inicio_servicio, Calendar.MINUTE) > 0
-                    && DateUtils.truncatedCompareTo(fin_cita, fin_servicio, Calendar.MINUTE) <= 0);
-            try {
-                if (esta_ocupando) {
-                    return false;
-                }
-            } catch (Exception e) {
+        for (Iterator iterator = lista.iterator(); iterator.hasNext();) {
+            Citas cita_obtenida = (Citas) iterator.next();
+            Date inicio_cita_encontrada = DateUtils.truncate(cita_obtenida.getFecha(), Calendar.MINUTE);
+            Date fin_cita_encontrada = DateUtils.addMinutes(cita_obtenida.getFecha(), cita_obtenida.getServicio().getDuracion());
+
+            if ((inicio_cita.compareTo(inicio_cita_encontrada) == 0
+                    || fin_cita.compareTo(fin_cita_encontrada) == 0)
+                    || (inicio_cita.after(inicio_cita_encontrada)
+                    && fin_cita.before(fin_cita_encontrada))) {
                 return false;
             }
         }
+
         return true;
     }
 
