@@ -67,6 +67,26 @@ public class Empleado implements Serializable {
         this.idUsuario = idUsuario;
         this.nombreCompleto = nombreCompleto;
     }
+    
+    public Empleado(String nombreCompleto, Date fechaIngreso, String tipoEmpleado) {
+        this.nombreCompleto = nombreCompleto;
+        this.fechaIngreso = fechaIngreso;
+        this.tipoEmpleado = tipoEmpleado;
+    }
+    
+    public Empleado(Integer idUsuario, Date fechaIngreso, String nombreCompleto, String tipoEmpleado) {
+        this.idUsuario = idUsuario;
+        this.nombreCompleto = nombreCompleto;
+        this.fechaIngreso = fechaIngreso;
+        this.tipoEmpleado = tipoEmpleado;
+    }
+    
+    public Empleado(Integer idUsuario, String nombreCompleto, Date fechaIngreso, String tipoEmpleado) {
+        this.idUsuario = idUsuario;
+        this.nombreCompleto = nombreCompleto;
+        this.fechaIngreso = fechaIngreso;
+        this.tipoEmpleado = tipoEmpleado;
+    }
 
     public Integer getIdUsuario() {
         return idUsuario;

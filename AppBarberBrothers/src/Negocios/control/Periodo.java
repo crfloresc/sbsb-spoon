@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Negocios.control;
 
 import Datos.entidades.Citas;
@@ -12,10 +7,6 @@ import java.util.Iterator;
 import java.util.List;
 import org.apache.commons.lang3.time.DateUtils;
 
-/**
- *
- * @author Luis
- */
 public class Periodo {
 
     private Periodo() {
@@ -38,10 +29,10 @@ public class Periodo {
             Date inicio_cita_encontrada = DateUtils.truncate(cita_obtenida.getFecha(), Calendar.MINUTE);
             Date fin_cita_encontrada = DateUtils.addMinutes(cita_obtenida.getFecha(), cita_obtenida.getServicio().getDuracion());
 
-            if ((inicio_cita.compareTo(inicio_cita_encontrada) == 0
-                    || fin_cita.compareTo(fin_cita_encontrada) == 0)
-                    || (inicio_cita.after(inicio_cita_encontrada)
-                    && fin_cita.before(fin_cita_encontrada))) {
+            if ((inicio_cita.compareTo(inicio_cita_encontrada) == 0 && cita.getBarbero().equals(cita_obtenida.getBarbero())
+                    || fin_cita.compareTo(fin_cita_encontrada) == 0 && cita.getBarbero().equals(cita_obtenida.getBarbero()))
+                    || ((inicio_cita.after(inicio_cita_encontrada)
+                    && fin_cita.before(fin_cita_encontrada)) && cita.getBarbero().equals(cita_obtenida.getBarbero()))) {
                 return false;
             }
         }

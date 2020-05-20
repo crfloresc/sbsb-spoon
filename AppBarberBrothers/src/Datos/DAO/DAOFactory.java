@@ -5,8 +5,9 @@ import Datos.DAO.CitaDAO;
 public class DAOFactory extends IDAOFactory {
     
     private static CitaDAO citaDAO;
-    private static DAOFactory DAOFactory;
-    
+    private static EmpleadoDAO empleadoDAO;
+    private static DAOFactory DAOFactory;    
+    private static ServicioDAO servicioDAO;
     
     private DAOFactory() {          
     }
@@ -24,6 +25,22 @@ public class DAOFactory extends IDAOFactory {
             citaDAO = new CitaDAO();
         }        
         return citaDAO;          
+    }
+    
+    @Override
+    public EmpleadoDAO crearEmpleadoDAO(){
+        if(empleadoDAO == null) {
+            empleadoDAO = new EmpleadoDAO();
+        }        
+        return empleadoDAO;          
+    }
+    
+    @Override
+    public ServicioDAO crearServicioDAO(){
+        if(servicioDAO == null) {
+            servicioDAO = new ServicioDAO();
+        }        
+        return servicioDAO;          
     }
 
     

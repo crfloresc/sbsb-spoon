@@ -60,10 +60,22 @@ public class Servicios implements Serializable {
         this.idServicio = idServicio;
     }
 
+    public Servicios(Integer idServicio, String nombre) {
+        this.idServicio = idServicio;
+        this.nombre = nombre;
+    }
+    
     public Servicios(Integer idServicio, String nombre, double precioUnitario) {
         this.idServicio = idServicio;
         this.nombre = nombre;
         this.precioUnitario = precioUnitario;
+    }
+    
+    public Servicios(Integer idServicio, String nombre, double precioUnitario, int duracion) {
+        this.idServicio = idServicio;
+        this.nombre = nombre;
+        this.precioUnitario = precioUnitario;
+        this.duracion = duracion;
     }
 
     public Integer getIdServicio() {

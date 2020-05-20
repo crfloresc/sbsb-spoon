@@ -9,7 +9,7 @@
     <class>Datos.entidades.Citas</class>
     <class>Datos.entidades.Productos</class>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/brothers"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3308/brothers"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
       <property name="javax.persistence.jdbc.password" value="123456"/>

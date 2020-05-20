@@ -64,6 +64,11 @@ public class Clientes implements Serializable {
         this.idUsuario = idUsuario;
     }
 
+    public Clientes(Integer idUsuario, String nombre) {
+        this.idUsuario = idUsuario;
+        this.nombre = nombre;
+    }
+    
     public Clientes(Integer idUsuario, String nombre, Date fechaRegistro) {
         this.idUsuario = idUsuario;
         this.nombre = nombre;

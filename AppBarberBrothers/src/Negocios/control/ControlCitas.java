@@ -18,12 +18,13 @@ public class ControlCitas extends Control {
          modelo = new ModeloCitas();        
     }
     
-    public void agregar(int id, Date fecha, Empleado barbero, Clientes cliente, Servicios servicio) {
+    public boolean agregar(int id, Date fecha, Empleado barbero, Clientes cliente, Servicios servicio) {
         Citas cita = new Citas(id, fecha, barbero, cliente, servicio);
         if (Periodo.comprobarCupo(listar(), cita)) {
             modelo.agregarCita(cita);
+            return true;
         } else {
-            // TODO: en caso contrario, mostrar mensaje de error al usuario
+            return false;
         }
     }
     
